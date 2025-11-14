@@ -13,6 +13,8 @@ function Router() {
   const { data, isPending, error } = useQuery({ queryKey, queryFn });
 
   console.log({ data, isPending, error });
+
+  if (isPending) return <h1>Loading...</h1>;
   return (
     <Routes>
       <Route index element={<HomePage />} />
