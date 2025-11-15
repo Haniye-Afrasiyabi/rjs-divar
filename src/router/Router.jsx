@@ -6,6 +6,7 @@ import DashboardPage from "pages/DashboardPage";
 import HomePage from "pages/HomePage";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "src/services/user";
+import Loader from "src/components/modules/Loader";
 
 function Router() {
   const queryKey = ["profile"];
@@ -14,7 +15,8 @@ function Router() {
 
   console.log({ data, isPending, error });
 
-  if (isPending) return <h1>Loading...</h1>;
+  if (isPending) return <Loader />;
+
   return (
     <Routes>
       <Route index element={<HomePage />} />
