@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import PageNotFound from "pages/404";
+import { useQuery } from "@tanstack/react-query";
+
+import HomePage from "pages/HomePage";
 import AdminPage from "pages/AdminPage";
 import AuthPage from "pages/AuthPage";
 import DashboardPage from "pages/DashboardPage";
-import HomePage from "pages/HomePage";
-import { useQuery } from "@tanstack/react-query";
-import { getProfile } from "src/services/user";
+import PageNotFound from "pages/404";
 import Loader from "src/components/modules/Loader";
+import { getProfile } from "src/services/user";
 
 function Router() {
   const queryKey = ["profile"];
