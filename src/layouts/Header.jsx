@@ -9,14 +9,14 @@ function Header() {
         </Link>
         <span className="flex items-center text-gray-500 h-12">
           <img src="location.svg" />
-          <p className="mr-1 text-xs">تهران</p>
+          <p className="mr-1 text-base">تهران</p>
         </span>
       </div>
       <div className="flex">
         <Link to="/auth">
           <span className="flex items-center text-gray-500 h-12">
             <img src="profile.svg" />
-            <p className="mr-1 text-xs">دیوار من</p>
+            <p className="mr-1 text-base">دیوار من</p>
           </span>
         </Link>
         <Link
