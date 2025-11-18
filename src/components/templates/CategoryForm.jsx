@@ -8,7 +8,8 @@ function CategoryForm() {
   const { mutate, data, error, isPending } = useMutation({
     mutationFn,
   });
-  console.log(data);
+
+  // console.log(data);
   const [form, setForm] = useState({ name: "", slug: "", icon: "" });
 
   const changeHandler = (event) => {
