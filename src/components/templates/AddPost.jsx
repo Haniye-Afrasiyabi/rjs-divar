@@ -15,6 +15,7 @@ function AddPost() {
   const queryKey = ["get-categories"];
   const queryFn = getCategory;
   const { data } = useQuery({ queryKey, queryFn });
+
   const changeHandler = (event) => {
     const name = event.target.name;
     if (name !== "images") {
@@ -31,9 +32,13 @@ function AddPost() {
   };
   return (
     <form onChange={changeHandler}>
-      <h3>افزودن آگهی</h3>
+      <h3 className="mb-7 border-b-4 border-[#a62626] w-fit pb-1">
+        افزودن آگهی
+      </h3>
 
-      <label htmlFor="title">عنوان</label>
+      <label htmlFor="title" className="block text-base mb-2.5">
+        عنوان
+      </label>
       <input
         type="text"
         name="title"
@@ -41,14 +46,18 @@ function AddPost() {
         className="block w-80 p-1 border border-gray-400 rounded mb-7"
       />
 
-      <label htmlFor="content">توضیحات</label>
+      <label htmlFor="content" className="block text-base mb-2.5">
+        توضیحات
+      </label>
       <textarea
         name="content"
         id="content"
-        className="block w-80 p-1 border border-gray-400 rounded mb-7"
+        className="block w-80 p-1 border border-gray-400 rounded mb-7 h-24"
       />
 
-      <label htmlFor="amount">قیمت</label>
+      <label htmlFor="amount" className="block text-base mb-2.5">
+        قیمت
+      </label>
       <input
         type="number"
         name="amount"
@@ -56,7 +65,9 @@ function AddPost() {
         className="block w-80 p-1 border border-gray-400 rounded mb-7"
       />
 
-      <label htmlFor="city">شهر</label>
+      <label htmlFor="city" className="block text-base mb-2.5">
+        شهر
+      </label>
       <input
         type="text"
         name="city"
@@ -64,7 +75,9 @@ function AddPost() {
         className="block w-80 p-1 border border-gray-400 rounded mb-7"
       />
 
-      <label htmlFor="category">دسته بندی</label>
+      <label htmlFor="category" className="block text-base mb-2.5">
+        دسته بندی
+      </label>
       <select
         name="category"
         id="category"
@@ -78,14 +91,21 @@ function AddPost() {
         ))}
       </select>
 
-      <label htmlFor="images">عکس</label>
+      <label htmlFor="images" className="block text-base mb-2.5">
+        عکس
+      </label>
       <input
         type="file"
         name="images"
         id="images"
         className="block w-80 p-1 border border-gray-400 rounded mb-7"
       />
-      <button onClick={addHandler}>ایجاد</button>
+      <button
+        onClick={addHandler}
+        className="bg-[#a62626] text-white border-none px-6 py-2.5 rounded text-base cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        ایجاد
+      </button>
     </form>
   );
 }
