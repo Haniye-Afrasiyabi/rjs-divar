@@ -1,17 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { getCategory } from "src/services/admin";
 
 function AddPost() {
+  const [form, setForm] = useState({
+    title: "",
+    content: "",
+    amount: null,
+    city: "",
+    category: "",
+    images: null,
+  });
+
   const queryKey = ["get-categories"];
   const queryFn = getCategory;
   const { data } = useQuery({ queryKey, queryFn });
+  const changeHandler = (event) => {
+    const name = event.target.name;
+    if (name !== "images") {
+      setForm({ ...form, [name]: event.target.value });
+    } else {
+      setForm({ ...form, [name]: event.target.files[0] });
+      console.log(event.target);
+    }
+  };
 
   const addHandler = (event) => {
     event.preventDefault();
-    console.log("sent");
+    console.log(form);
   };
   return (
-    <form>
+    <form onChange={changeHandler}>
       <h3>افزودن آگهی</h3>
 
       <label htmlFor="title">عنوان</label>
@@ -51,6 +70,7 @@ function AddPost() {
         id="category"
         className="block w-80 p-1 border border-gray-400 rounded mb-7"
       >
+        <option value="">انتخاب کنید</option>
         {data?.data.map((category) => (
           <option key={category._id} value={category._id}>
             {category.name}
