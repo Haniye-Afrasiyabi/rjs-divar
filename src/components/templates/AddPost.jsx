@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
 import { getCategory } from "src/services/admin";
+import { getCookie } from "src/utils/cookie";
 
 function AddPost() {
   const [form, setForm] = useState({
@@ -28,7 +30,24 @@ function AddPost() {
 
   const addHandler = (event) => {
     event.preventDefault();
-    console.log(form);
+
+    const formData = new FormData();
+
+    for (let i in form) {
+      formData.append(i, form[i]);
+    }
+
+    const token = getCookie("accessToken");
+
+    axios
+      .post(`${import.meta.env.VITE_BASE_URL}post/create`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   };
   return (
     <form onChange={changeHandler}>
