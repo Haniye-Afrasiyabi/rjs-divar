@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { getCategory } from "src/services/admin";
 import { getCookie } from "src/utils/cookie";
 
@@ -46,8 +47,8 @@ function AddPost() {
           Authorization: `bearer ${token}`,
         },
       })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      .then((res) => toast.success(res.data.message))
+      .catch((error) => toast.error("مشکلی پیش آمده است"));
   };
   return (
     <form onChange={changeHandler}>
@@ -121,7 +122,7 @@ function AddPost() {
       />
       <button
         onClick={addHandler}
-        className="bg-[#a62626] text-white border-none px-6 py-2.5 rounded text-base cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-[#a62626] text-white border-none px-6 py-2.5 rounded text-base cursor-pointer"
       >
         ایجاد
       </button>
