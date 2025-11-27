@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "services/user";
 import Loader from "../modules/Loader";
+import { sp } from "src/utils/numbers";
 
 function PostList() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -20,12 +21,12 @@ function PostList() {
             <div key={post._id}>
               <img src={`${baseUrl}${post.images[0]}`} />
               <div>
-                <p>{post.title}</p>
-                <span>{post.content}</span>
+                <p>{post.options.title}</p>
+                <span>{post.options.content}</span>
               </div>
               <div>
-                <p>{post.createdAt}</p>
-                <span>{post.amount} تومان</span>
+                <p>{new Date(post.createdAt).toLocaleDateString("fa-IR")}</p>
+                <span>{sp(post.amount)} تومان</span>
               </div>
             </div>
           ))}
