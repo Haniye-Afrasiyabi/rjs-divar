@@ -2,6 +2,7 @@ import { sp } from "src/utils/numbers";
 
 function Main({ posts }) {
   const baseUrl = import.meta.env.VITE_BASE_URL;
+
   console.log(posts);
   return (
     <div>

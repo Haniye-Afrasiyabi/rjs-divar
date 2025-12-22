@@ -1,13 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getPosts } from "services/user";
 import Loader from "../modules/Loader";
 import { sp } from "src/utils/numbers";
+import { deletePost } from "src/services/user";
 
 function PostList() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
+
+  const queryClient = useQueryClient();
+
   const queryKey = ["my-post-list"];
   const queryFn = getPosts;
   const { data, isPending } = useQuery({ queryKey, queryFn });
+
+  const { mutate, isPending: deletePending } = useMutation({
+    mutationFn: deletePost,
+  });
+
+  const handleDelete = (id) => {
+    mutate(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["my-post-list"] });
+        queryClient.invalidateQueries({ queryKey: ["post-list"] })
+      },
+    });
+  };
 
   return (
     <div>
@@ -41,6 +58,13 @@ function PostList() {
                   {sp(post.amount)} تومان
                 </span>
               </div>
+              <button
+                onClick={() => handleDelete(post._id)}
+                disabled={deletePending}
+                className="bg-[#a62626] text-white border-none w-32  px-3 py-2.5 rounded text-xs ml-3 cursor-pointer"
+              >
+                حذف آگهی
+              </button>
             </div>
           ))}
         </>

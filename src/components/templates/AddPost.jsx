@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -6,6 +6,8 @@ import { getCategory } from "src/services/admin";
 import { getCookie } from "src/utils/cookie";
 
 function AddPost() {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const queryClient = useQueryClient();
   const [form, setForm] = useState({
     title: "",
     content: "",
@@ -41,13 +43,17 @@ function AddPost() {
     const token = getCookie("accessToken");
 
     axios
-      .post(`${import.meta.env.VITE_BASE_URL}post/create`, formData, {
+      .post(`${baseUrl}post/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `bearer ${token}`,
         },
       })
-      .then((res) => toast.success(res.data.message))
+      .then((res) => {
+        toast.success(res.data.message);
+        queryClient.invalidateQueries({ queryKey: ["my-post-list"] });
+        queryClient.invalidateQueries({ queryKey: ["post-list"] });
+      })
       .catch((error) => toast.error("مشکلی پیش آمده است"));
   };
   return (
