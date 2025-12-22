@@ -61,7 +61,7 @@ function PostList() {
               <button
                 onClick={() => handleDelete(post._id)}
                 disabled={deletePending}
-                className="bg-[#a62626] text-white border-none w-32  px-3 py-2.5 rounded text-xs ml-3 cursor-pointer"
+                className="bg-[#a62626] text-white border-none w-32  px-3 py-2.5 rounded text-xs mx-3 cursor-pointer"
               >
                 حذف آگهی
               </button>
